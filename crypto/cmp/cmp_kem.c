@@ -14,6 +14,7 @@
 #include <openssl/params.h>
 #include <openssl/core_names.h>
 #include <openssl/cmp_util.h>
+#include "crypto/asn1.h"
 
 #define RSAKEM_KEYLENGTH 32
 
