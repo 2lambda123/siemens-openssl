@@ -228,7 +228,7 @@ CMP_R_ERROR_UNEXPECTED_CERTCONF:160:error unexpected certconf
 CMP_R_ERROR_VALIDATING_PROTECTION:140:error validating protection
 CMP_R_ERROR_VALIDATING_SIGNATURE:171:error validating signature
 CMP_R_EXPECTED_POLLREQ:104:expected pollreq
-CMP_R_ERROR_DERIVING_KBM_SSK:196:error deriving ssk
+CMP_R_ERROR_DERIVING_KBM_SSK:198:error deriving ssk
 CMP_R_FAILED_BUILDING_OWN_CHAIN:164:failed building own chain
 CMP_R_FAILED_EXTRACTING_PUBKEY:141:failed extracting pubkey
 CMP_R_FAILURE_OBTAINING_RANDOM:110:failure obtaining random
