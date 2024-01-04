@@ -8,6 +8,7 @@
  * https://www.openssl.org/source/license.html
  */
 #include "cmp_local.h"
+#include "crypto/asn1.h"
 #include <openssl/evp.h>
 #include <openssl/kdf.h>
 #include <openssl/params.h>
