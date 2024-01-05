@@ -198,15 +198,16 @@ static int kem_decapsulation(OSSL_CMP_CTX *ctx, EVP_PKEY *pkey, int is_EC,
                              unsigned char **secret, size_t *secret_len)
 {
     int ret = 0;
+    EVP_PKEY_CTX *kem_decaps_ctx;
 
     if (ctx == NULL || pkey == NULL
         || ct == NULL
         || secret == NULL || secret_len == NULL)
         return 0;
 
-    EVP_PKEY_CTX *kem_decaps_ctx = EVP_PKEY_CTX_new_from_pkey(ctx->libctx,
-                                                              pkey,
-                                                              ctx->propq);
+    kem_decaps_ctx = EVP_PKEY_CTX_new_from_pkey(ctx->libctx,
+                                                pkey,
+                                                ctx->propq);
 
     if (kem_decaps_ctx == NULL
         || EVP_PKEY_decapsulate_init(kem_decaps_ctx, NULL) <= 0
