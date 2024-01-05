@@ -291,6 +291,7 @@ OSSL_CMP_ITAV *ossl_cmp_itav_new_KemCiphertext(X509_ALGOR *kem,
 int ossl_cmp_kem_KemOtherInfo_new(OSSL_CMP_CTX *ctx,
                                   unsigned char **out, int *len)
 {
+    int ret = 0;
     OSSL_CMP_KEMOTHERINFO *kemOtherInfo;
 
     if (out == NULL || len == NULL)
@@ -318,11 +319,15 @@ int ossl_cmp_kem_KemOtherInfo_new(OSSL_CMP_CTX *ctx,
     if ((*len = i2d_OSSL_CMP_KEMOTHERINFO(kemOtherInfo, out)) <= 0)
         goto err;
 
-    return 1;
+    ret = 1;
 
  err:
+    kemOtherInfo->transactionID = NULL;
+    kemOtherInfo->senderNonce = NULL;
+    kemOtherInfo->recipNonce = NULL;
+    kemOtherInfo->ct = NULL;
     OSSL_CMP_KEMOTHERINFO_free(kemOtherInfo);
-    return 0;
+    return ret;
 }
 
 OSSL_CMP_ITAV *OSSL_CMP_ITAV_new_caCerts(const STACK_OF(X509) *caCerts)
@@ -405,7 +410,7 @@ OSSL_CMP_ITAV *OSSL_CMP_ITAV_new_rootCaKeyUpdate(const X509 *newWithNew,
     itav->infoValue.rootCaKeyUpdate = upd;
     return itav;
 
-    err:
+ err:
     OSSL_CMP_ROOTCAKEYUPDATE_free(upd);
     return NULL;
 }
