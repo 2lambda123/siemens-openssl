@@ -78,6 +78,7 @@ int ossl_cmp_kemrsa_decapsulation(OSSL_CMP_CTX *ctx, EVP_PKEY *pkey,
     int ret = 0;
     size_t sec_len;
     unsigned char *sec;
+    EVP_PKEY_CTX *kem_decaps_ctx;
 
     if (ctx == NULL || pkey == NULL
         || ct == NULL
@@ -87,9 +88,9 @@ int ossl_cmp_kemrsa_decapsulation(OSSL_CMP_CTX *ctx, EVP_PKEY *pkey,
     if (EVP_PKEY_get_base_id(pkey) != EVP_PKEY_RSA)
         return 0;
 
-    EVP_PKEY_CTX *kem_decaps_ctx = EVP_PKEY_CTX_new_from_pkey(ctx->libctx,
-                                                              pkey,
-                                                              ctx->propq);
+    kem_decaps_ctx = EVP_PKEY_CTX_new_from_pkey(ctx->libctx,
+                                                pkey,
+                                                ctx->propq);
 
     if (kem_decaps_ctx == NULL
         || EVP_PKEY_decapsulate_init(kem_decaps_ctx, NULL) <= 0
